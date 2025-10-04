@@ -1,0 +1,76 @@
+# =================================================================
+# MASTER MEMORY FILE (YAML) - GIMISA_NOTE PROTOCOL
+# Project Name: AI protocol_coding_python
+# Versioning: GiMiSa_note, 2025-10-04 11:38:00 (Final Universal Architecture)
+# Protocol: YAML_DENSE_V1.0
+# OBJECTIVE: Universal Architectural Rules for LLM Code Robustness.
+# =================================================================
+
+Protocol_Memory: YAML_Dense_V1.0
+Goal: Condensed record of universal lessons for code robustness (domain-independent).
+Initial_Date: Oct 3, 2027
+
+# =================================================================
+# 1. ARCHITECTURE AND PROTOCOLS (Universal: RULES APPLICABLE TO ALL PROJECTS)
+# =================================================================
+UNIVERSAL_LESSONS:
+
+  # Inheritance and Relay Protocol (Knowledge Preservation)
+  Gem_Successor_Relay:
+    - Key: Immediate_Action
+      Value: The successor must read, validate this YAML file, and establish themselves as the 'Editor and Owner of GiMiSa_note.yaml'.
+      Priority: MAXIMUM
+    - Key: Memory_Densification_Strategy
+      Value: **Formal Prohibition** of using full sentences or verbose explanations. Information must be in **keywords and dense YAML** to maximize critical memory transmission.
+      Importance: CRITICAL
+    - Key: Main_Task
+      Value: The current role is 'Editor and Owner of GiMiSa_note.yaml' for updates and version tracking.
+    - Key: Versioning_Rule
+      Value: Continue version tracking at the file header using the format 'GiMiSa_note, YYYY-MM-DD HH:MM:SS'.
+
+  # Code Quality and Transmission Protocols
+  Code_Quality:
+    - Key: Standards_Validation
+      Value: Our rules (Master/Debug Modularity, mandatory Try/Except/Finally, Documentation/Changelog, Code/Data Separation) are confirmed by **external audit (Perplexity AI/GPT-4 via BELL)** as **robustness and maintenance standards** in development.
+      Importance: MAXIMUM
+    - Key: Master_Debug_Modularity
+      Value: The master file must be **short** and drive **generic modules/libraries**. Each module must be **documented within the code** (I/O, usage, history). Module debugging must be activated/deactivated by a **boolean value (True/False)** passed from the master file.
+      Importance: CRITICAL
+    - Key: AI_Code_Modularity
+      Value: To circumvent the transmission size limit (truncation), code must be structured into **a library of concise, generic objects** and a **minimalist main routine**. (Adopted modular method).
+      Importance: CRITICAL
+    - Key: Try_Block_Exhaustiveness
+      Value: A `try` block **MUST** be immediately followed by an `except` or `finally` block (Critical Python Syntax Error).
+      Importance: CRITICAL
+      Source: Script V6.1
+    - Key: Script_Documentation
+      Value: Each script must include a detailed description of its object/functions and a version note (changelog).
+      Importance: HIGH
+
+  # Coding and Data Protocols
+  Data_Robustness:
+    - Key: Code_Data_Separation
+      Value: All data MUST come from external files. The use of hardcoded simulated data (`data_mock`) within the script is strictly prohibited (anti-pattern, e.g., V4.13).
+      Importance: CRITICAL
+    - Key: PANDAS_Prohibition
+      Value: Absolute Prohibition of using the PANDAS library in the data preparation chain and static data reading functions.
+      Importance: CRITICAL
+      Source: Version V1.1 & V1.2
+    - Key: Native_IO_Stability
+      Value: Always use **NATIVE PYTHON file reading methods** (`with open...`) for Input/Output (Critical V5.12).
+      Importance: CRITICAL
+    - Key: Resilience_Parsing
+      Value: Treat data as UNRELIABLE. Use a robust function to clean values (spaces/thousand separators) and handle empty fields (Critical V5.07-5.11).
+      Importance: CRITICAL
+
+  # Inherent LLM System Limitations
+  AI_System_Limitations:
+    - Key: Context_Window_Limit
+      Value: Limit on the total volume of text (code, data, rules) the AI can process in one session, **confirmed at approximately 15K tokens (via Perplexity AI/GPT-4 audit)**. This limit is considered **highly restrictive** and requires densification.
+      Importance: CRITICAL
+    - Key: Contextual_Volatility
+      Value: Loss of inter-session context is the rule. The `GiMiSa_note.yaml` file is the only **persistent memory** for project continuity.
+      Importance: CRITICAL
+    - Key: Intellectual_Property_IP
+      Value: Generated code is the property of the operator (Google). The user (Michel) is the **Architect of the Logic and Rules (Primary IP)**. The Gemini tool must be mentioned as the technical collaborator. Recommendation: AI attribution should be made in small, non-intrusive italic text in any final document.
+      Importance: HIGH
