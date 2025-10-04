@@ -23,29 +23,12 @@ This protocol transforms personal effort (the cost of not subscribing) into an *
 
 ---
 
-### 🏗️ Current Project: Xcraft Optimization
-
-Our first project demonstrates the protocol's effectiveness in a complex environment:
-
-| Project Name | Branch | Status | Focus |
-| :--- | :--- | :--- | :--- |
-| **Xcraft Optimization** | `xcraft_dev` | In Development | Applies the universal protocol to metric rules (ROI/DSA) on a specific simulation. |
-
-**How to Start Development on Xcraft:**
-
-1.  **Start on `main`** and clone the universal rules.
-2.  **Switch to the project branch:** `git checkout xcraft_dev`.
-3.  **Use BOTH files:** For Xcraft, you must inject **`GiMiSa_note.yaml`** (universal rules) AND **`xcraft_notes.yaml`** (domain-specific rules) into your AI session.
-
----
-
 ### How to Use the Protocol
 
-1.  **Clone this repository:** `git clone https://github.com/gimisa/gimisa.git`
-2.  **Start a Development Branch:** Create a branch for your specific project (e.g., `git checkout -b my_new_project_dev`).
-3.  **Include GiMiSa_note.yaml:** Always reference the universal **`GiMiSa_note.yaml`** in your AI session.
+1.  **You can Clone this repository or simply download GiMISa_note.yaml:** `git clone https://github.com/gimisa/gimisa.git`
+2.  **Create a branch if you cloned it and edit GiMiSa_note as you see fit for you own needs . for your specific project (e.g., `git checkout -b my_new_project_dev`).
+3.  **Include GiMiSa_note.yaml:** Always reference the universal **`GiMiSa_note.yaml`** in your AI session. By pasting it before requestion a code . AI will read it follow protocol 
 
 ### License
 
 This project is licensed under the **MIT License**.
-# gimisa
