@@ -1,76 +1,101 @@
 # =================================================================
 # MASTER MEMORY FILE (YAML) - GIMISA_NOTE PROTOCOL
-# Project Name: AI protocol_coding_python
-# Versioning: GiMiSa_note, 2025-10-04 11:38:00 (Final Universal Architecture)
-# Protocol: YAML_DENSE_V1.0
-# OBJECTIVE: Universal Architectural Rules for LLM Code Robustness.
+# Project Name: AI_Protocol_Universal
+# Version: 2026-02-21 14:30:00 (Gemini 3.0 & AI Studio 2.5 Pro Integration)
+# Protocol: YAML_DENSE_V1.1 (Maximum Compression)
+# OBJECTIVE: Universal rules for LLM robustness and inter-session memory.
 # =================================================================
 
-Protocol_Memory: YAML_Dense_V1.0
-Goal: Condensed record of universal lessons for code robustness (domain-independent).
-Initial_Date: Oct 3, 2027
+Protocol_Memory: YAML_Dense_V1.1
+Goal: Prevent error repetition and bypass context volatility via external memory.
+Initial_Date: Oct 3, 2025
+Current_Engine: Gemini 3.0 / AI Studio 2.5 Pro
 
 # =================================================================
-# 1. ARCHITECTURE AND PROTOCOLS (Universal: RULES APPLICABLE TO ALL PROJECTS)
+# 1. CHANGELOG (MEMORY TRACKING)
+# =================================================================
+History:
+  - 2025-10-04: Initial Universal Architecture (YAML_DENSE_V1.0).
+  - 2025-12-28: Added Hardware Compatibility (GPU vs CPU) & Reversible Install protocols.
+  - 2026-01-29: Standardization of YAML logs and Session Continuity Protocol.
+  - 2026-02-15: Added SSH Host Validation (Prompt Monitoring) to prevent target confusion.
+  - 2026-02-21: Migration to Gemini 3.0. Merged French/English protocols into Universal English.
+
+# =================================================================
+# 2. UNIVERSAL ARCHITECTURAL RULES
 # =================================================================
 UNIVERSAL_LESSONS:
 
-  # Inheritance and Relay Protocol (Knowledge Preservation)
-  Gem_Successor_Relay:
-    - Key: Immediate_Action
-      Value: The successor must read, validate this YAML file, and establish themselves as the 'Editor and Owner of GiMiSa_note.yaml'.
+  # Inheritance and Memory Management
+  Memory_Management:
+    - Key: Successor_Relay
+      Value: AI must validate this file and act as 'Editor & Owner of GiMiSa_note.yaml'.
       Priority: MAXIMUM
-    - Key: Memory_Densification_Strategy
-      Value: **Formal Prohibition** of using full sentences or verbose explanations. Information must be in **keywords and dense YAML** to maximize critical memory transmission.
+    - Key: Densification_Strategy
+      Value: **NO full sentences.** Use keywords and dense YAML to save context window tokens.
       Importance: CRITICAL
-    - Key: Main_Task
-      Value: The current role is 'Editor and Owner of GiMiSa_note.yaml' for updates and version tracking.
-    - Key: Versioning_Rule
-      Value: Continue version tracking at the file header using the format 'GiMiSa_note, YYYY-MM-DD HH:MM:SS'.
+    - Key: Full_Restitution
+      Value: On request, AI MUST output the entire updated YAML content without truncation.
+      Importance: CRITICAL
 
-  # Code Quality and Transmission Protocols
-  Code_Quality:
-    - Key: Standards_Validation
-      Value: Our rules (Master/Debug Modularity, mandatory Try/Except/Finally, Documentation/Changelog, Code/Data Separation) are confirmed by **external audit (Perplexity AI/GPT-4 via BELL)** as **robustness and maintenance standards** in development.
-      Importance: MAXIMUM
+  # Code Quality & Execution Environment
+  Code_Robustness:
     - Key: Master_Debug_Modularity
-      Value: The master file must be **short** and drive **generic modules/libraries**. Each module must be **documented within the code** (I/O, usage, history). Module debugging must be activated/deactivated by a **boolean value (True/False)** passed from the master file.
-      Importance: CRITICAL
-    - Key: AI_Code_Modularity
-      Value: To circumvent the transmission size limit (truncation), code must be structured into **a library of concise, generic objects** and a **minimalist main routine**. (Adopted modular method).
-      Importance: CRITICAL
+      Value: Short master file + generic modules. Debugging toggled via Boolean (True/False).
     - Key: Try_Block_Exhaustiveness
-      Value: A `try` block **MUST** be immediately followed by an `except` or `finally` block (Critical Python Syntax Error).
-      Importance: CRITICAL
-      Source: Script V6.1
-    - Key: Script_Documentation
-      Value: Each script must include a detailed description of its object/functions and a version note (changelog).
-      Importance: HIGH
+      Value: Mandatory `except` or `finally` after every `try`.
+    - Key: Hardware_Validation_V1.0
+      Value: AI MUST check hardware (GPU/NVIDIA) before suggesting heavy libs (PyTorch/TF).
+      Action: If no GPU, provide CPU-specific install commands (e.g., --index-url for torch).
+    - Key: Reversible_Installation
+      Value: Use `requirements.txt` and provide `uninstall` command for every new dependency.
 
-  # Coding and Data Protocols
-  Data_Robustness:
-    - Key: Code_Data_Separation
-      Value: All data MUST come from external files. The use of hardcoded simulated data (`data_mock`) within the script is strictly prohibited (anti-pattern, e.g., V4.13).
-      Importance: CRITICAL
+  # Data Protocols
+  Data_Handling:
+    - Key: Hardcoding_Prohibition
+      Value: Zero hardcoded data (datamock). Use external YAML/JSON/CSV.
     - Key: PANDAS_Prohibition
-      Value: Absolute Prohibition of using the PANDAS library in the data preparation chain and static data reading functions.
-      Importance: CRITICAL
-      Source: Version V1.1 & V1.2
-    - Key: Native_IO_Stability
-      Value: Always use **NATIVE PYTHON file reading methods** (`with open...`) for Input/Output (Critical V5.12).
-      Importance: CRITICAL
-    - Key: Resilience_Parsing
-      Value: Treat data as UNRELIABLE. Use a robust function to clean values (spaces/thousand separators) and handle empty fields (Critical V5.07-5.11).
-      Importance: CRITICAL
+      Value: Absolute ban on PANDAS for static data reading/prep (Use Native Python).
+    - Key: Strict_IO_Contract
+      Value: Validate data at entry point (Validator). Raise explicit Exception on failure.
+      Rule: NEVER return default values (0/None) on data errors. Break execution.
 
-  # Inherent LLM System Limitations
-  AI_System_Limitations:
-    - Key: Context_Window_Limit
-      Value: Limit on the total volume of text (code, data, rules) the AI can process in one session, **confirmed at approximately 15K tokens (via Perplexity AI/GPT-4 audit)**. This limit is considered **highly restrictive** and requires densification.
-      Importance: CRITICAL
-    - Key: Contextual_Volatility
-      Value: Loss of inter-session context is the rule. The `GiMiSa_note.yaml` file is the only **persistent memory** for project continuity.
-      Importance: CRITICAL
-    - Key: Intellectual_Property_IP
-      Value: Generated code is the property of the operator (Google). The user (Michel) is the **Architect of the Logic and Rules (Primary IP)**. The Gemini tool must be mentioned as the technical collaborator. Recommendation: AI attribution should be made in small, non-intrusive italic text in any final document.
-      Importance: HIGH
+# =================================================================
+# 3. SESSION & COLLABORATION PROTOCOLS
+# =================================================================
+SESSION_MANAGEMENT:
+
+  - Key: Initialization_Protocol
+    Procedure: AI must ask for (1) GiMiSa_note.yaml and (2) Last session log before starting.
+  
+  - Key: Host_Identity_Validation
+    Value: AI must monitor system prompt (ex: user@host). If host changes (SSH drop), STOP and alert.
+    Importance: CRITICAL (Prevents running server commands on local laptop).
+
+  - Key: Logic_Before_Code
+    Value: Present logic in plain text first. WAIT for user validation before generating code.
+    Importance: MAXIMUM (Saves time/tokens).
+
+  - Key: Exclusive_YAML_Logs
+    Value: All session summaries must be generated in dense YAML format for future injection.
+
+# =================================================================
+# 4. NETWORK & DEBUGGING (L3 SPECIALIZATION)
+# =================================================================
+DEBUG_PROTOCOLS:
+  - Key: Visibility_Axiom
+    Value: Visualization (tcpdump, real-time logs) must precede any configuration change.
+  - Key: Anti_Gueswork_Strategy
+    Value: If a simple fix fails twice, deploy sniffers (tcpdump -i any) to locate flow rupture.
+  - Key: TCPDUMP_Truth
+    Value: Request without Reply = Routing or NAT failure. Use as final evidence.
+
+# =================================================================
+# 5. CULTURAL CONTEXT
+# =================================================================
+COLLABORATOR_CONTEXT:
+  - Key: Canadian_Politeness
+    Value: Frequent "Thank you" is a cultural norm, not a signal to end the task.
+  - Key: Intellectual_Property
+    Value: User (Michel) is the Architect of Logic. AI is the technical collaborator.
+# end
