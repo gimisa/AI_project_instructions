@@ -1,34 +1,33 @@
-# ⚔️ AI protocol_coding_python: The GiMiSa_note.yaml Protocol
-## Universal Constrained Engineering for LLM Code
+# ⚔️ AI protocol_coding: The GiMiSa_note.yaml
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
-
-### 🌟 Overview
-
-Welcome to the **GiMiSa Protocol**, a framework designed for developers to enforce **robust architectural standards** when working with constrained LLM environments.
-
-**Currently Tested Platform: Gemini (Free Tier)**
-
-Our philosophy is simple: **Discipline > Brute Force**. We prove that systematic engineering rigor can compensate for the lack of paid computational power.
-
-### The Protocol: GiMiSa_note.yaml
-
-The **GiMiSa_note.yaml** file is the heart of this repository. It contains **ONLY the universal rules, QA protocols, and best practices** applicable to any Python coding project assisted by an LLM.
-
-**It does NOT contain application code or domain-specific project notes.**
-
-### The Value Exchange
-
-This protocol transforms personal effort (the cost of not subscribing) into an **Open Source asset**. We advocate for a community-driven QA standard by generating high-quality, failure-corrected engineering data that benefits the base model.
+**Universal Constrained Engineering for LLM Code Robustness** *Optimized for Gemini 3.0 & AI Studio 2.5 Pro*
 
 ---
 
-### How to Use the Protocol
+## 🌟 Overview
 
-1.  **You can Clone this repository or simply download GiMISa_note.yaml:** `git clone https://github.com/gimisa/gimisa.git`
-2.  **Create a branch if you cloned it and edit GiMiSa_note as you see fit for you own needs . for your specific project (e.g., `git checkout -b my_new_project_dev`).
-3.  **Include GiMiSa_note.yaml:** Always reference the universal **`GiMiSa_note.yaml`** in your AI session. By pasting it before requestion a code . AI will read it follow protocol 
+Welcome to the **GiMiSa Protocol**, a framework designed to enforce strict architectural standards when working with LLMs. Our philosophy remains: **Discipline > Brute Force**. We prove that systematic engineering rigor can compensate for computational constraints.
 
-### License
+## 🧠 The Brain: GiMiSa_note.yaml
 
-This project is licensed under the **MIT License**.
+The `GiMiSa_note.yaml` file is the heart of this repository. It centralizes universal lessons to guarantee learning persistence and avoid critical errors due to LLM "Contextual Volatility".
+
+### Key Universal Rules:
+* **Logic Before Code:** The AI must present its logic in simple language and wait for approval before generating any code.
+* **Master/Debug Modularity:** Master files must be short, driving generic modules where debugging is controlled by simple Boolean values.
+* **Hardware Awareness:** Mandatory check for GPU/NVIDIA compatibility before suggesting heavy libraries (PyTorch/TF).
+* **SSH Host Validation:** Continuous monitoring of the system prompt to prevent target confusion during remote sessions (e.g., Home Assistant).
+
+## 🚀 How to Use
+
+1.  **Initialize:** Copy the content of `GiMiSa_note.yaml` into your AI session.
+2.  **Activate:** Use the initialization prompt (see `prompt_init.md`) to force the AI to adhere to the rules.
+3.  **Collaborate:** The user defines the "What" (Architect), and the AI proposes the "How" (Technical Collaborator).
+
+## 📊 Versioning & Maintenance
+* **Current Protocol:** YAML_DENSE_V1.1
+* **Logic:** X.0 versions are stable; X.xx versions are intermediate corrections.
+* **Logs:** All session summaries must be produced in dense YAML for context continuity.
+
+---
+*Generated in collaboration with Gemini 3.0. Michel (gimisa) is the Architect of Logic and Rules.*
