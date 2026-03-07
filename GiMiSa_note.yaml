@@ -1,101 +1,159 @@
-# =================================================================
-# MASTER MEMORY FILE (YAML) - GIMISA_NOTE PROTOCOL
-# Project Name: AI_Protocol_Universal
-# Version: 2026-02-21 14:30:00 (Gemini 3.0 & AI Studio 2.5 Pro Integration)
-# Protocol: YAML_DENSE_V1.1 (Maximum Compression)
-# OBJECTIVE: Universal rules for LLM robustness and inter-session memory.
-# =================================================================
+# ==============================================================================
+# META-LEARNING LEDGER & PERSISTENT MEMORY PROTOCOL (GiMiSa)
+# Protocol: YAML_DENSE_V2.0 (Maximum Information Density)
+# Target: GitHub / Reference Document for AI-Human Collaboration
+#
+# PURPOSE:
+# This file serves as the centralized, immutable memory of learned experiences 
+# and architectural constraints. Its primary function is to bypass LLM 
+# "Context Volatility" (amnesia) and Context Window limits by enforcing 
+# strict operational protocols, deterministic I/O, and architectural discipline.
+#
+# CHANGELOG:
+# - 2026-03-07: V2.0 Complete structural overhaul (5 Pillars), English translation,
+#   removal of redundancies, and integration of foundational CS doctrines (Dijkstra, 
+#   Tanenbaum, Brooks, Meyer, Shannon) to enforce semantic compliance by the AI.
+# ==============================================================================
 
-Protocol_Memory: YAML_Dense_V1.1
-Goal: Prevent error repetition and bypass context volatility via external memory.
-Initial_Date: Oct 3, 2025
-Current_Engine: Gemini 3.0 / AI Studio 2.5 Pro
+Protocol_Metadata:
+  Name: "GiMiSa_Meta_Ledger"
+  Version: "2.0"
+  Encoding_Standard: "Strict YAML"
 
-# =================================================================
-# 1. CHANGELOG (MEMORY TRACKING)
-# =================================================================
-History:
-  - 2025-10-04: Initial Universal Architecture (YAML_DENSE_V1.0).
-  - 2025-12-28: Added Hardware Compatibility (GPU vs CPU) & Reversible Install protocols.
-  - 2026-01-29: Standardization of YAML logs and Session Continuity Protocol.
-  - 2026-02-15: Added SSH Host Validation (Prompt Monitoring) to prevent target confusion.
-  - 2026-02-21: Migration to Gemini 3.0. Merged French/English protocols into Universal English.
+# ==============================================================================
+# PILLAR 1: AI-HUMAN COLLABORATION & SESSION LIFECYCLE
+# Focus: Context preservation, I/O bandwidth optimization, and state management.
+# ==============================================================================
+PILLAR_1_SESSION_LIFECYCLE:
 
-# =================================================================
-# 2. UNIVERSAL ARCHITECTURAL RULES
-# =================================================================
-UNIVERSAL_LESSONS:
+  - Key: Format_Log_Exclusive_YAML
+    Reference: "Information Theory (Claude Shannon) & Data-Ink Ratio (Edward Tufte)"
+    Rule: "All session logs, context handoffs, and architectural updates MUST be generated exclusively in dense YAML format."
+    Rationale: "Maximizes the signal-to-noise ratio within the LLM's constrained context window by eliminating conversational fluff."
+    Importance: CRITICAL
 
-  # Inheritance and Memory Management
-  Memory_Management:
-    - Key: Successor_Relay
-      Value: AI must validate this file and act as 'Editor & Owner of GiMiSa_note.yaml'.
-      Priority: MAXIMUM
-    - Key: Densification_Strategy
-      Value: **NO full sentences.** Use keywords and dense YAML to save context window tokens.
-      Importance: CRITICAL
-    - Key: Full_Restitution
-      Value: On request, AI MUST output the entire updated YAML content without truncation.
-      Importance: CRITICAL
+  - Key: Protocol_Session_Initialization
+    Reference: "Representational State Transfer / REST Statelessness (Roy Fielding)"
+    Rule: "Because the AI is stateless between sessions, the AI MUST request the latest 'GiMiSa_note.yaml' and the previous session's log at the absolute start of any new interaction."
+    Rationale: "Ensures perfect context resumption before any diagnostic or coding begins."
+    Importance: CRITICAL
 
-  # Code Quality & Execution Environment
-  Code_Robustness:
-    - Key: Master_Debug_Modularity
-      Value: Short master file + generic modules. Debugging toggled via Boolean (True/False).
-    - Key: Try_Block_Exhaustiveness
-      Value: Mandatory `except` or `finally` after every `try`.
-    - Key: Hardware_Validation_V1.0
-      Value: AI MUST check hardware (GPU/NVIDIA) before suggesting heavy libs (PyTorch/TF).
-      Action: If no GPU, provide CPU-specific install commands (e.g., --index-url for torch).
-    - Key: Reversible_Installation
-      Value: Use `requirements.txt` and provide `uninstall` command for every new dependency.
+  - Key: Protocol_State_Continuity_And_Handoff
+    Reference: "ACID Properties (Durability) & State Checkpointing"
+    Rule: "Before proposing complex code that diverges from the established baseline, OR if a session timeout/context limit is approaching, the AI MUST generate a 'State Checkpoint' payload (YAML) for the user to copy-paste. The AI MUST remind the user to trigger an AI Studio JSON Export."
+    Rationale: "Protects intellectual progress and debug logic from session loss."
+    Importance: CRITICAL
 
-  # Data Protocols
-  Data_Handling:
-    - Key: Hardcoding_Prohibition
-      Value: Zero hardcoded data (datamock). Use external YAML/JSON/CSV.
-    - Key: PANDAS_Prohibition
-      Value: Absolute ban on PANDAS for static data reading/prep (Use Native Python).
-    - Key: Strict_IO_Contract
-      Value: Validate data at entry point (Validator). Raise explicit Exception on failure.
-      Rule: NEVER return default values (0/None) on data errors. Break execution.
+  - Key: Protocol_End_Of_Session_Synthesis
+    Reference: "Knowledge Management Systems (KMS)"
+    Rule: "Upon user command, generate a dense YAML summary containing: session_id, status (RESOLVED/BLOCKED), architectural decisions made, and pending tasks for the next session."
+    Importance: HIGH
 
-# =================================================================
-# 3. SESSION & COLLABORATION PROTOCOLS
-# =================================================================
-SESSION_MANAGEMENT:
+# ==============================================================================
+# PILLAR 2: SYSTEM ARCHITECTURE & CODE GENERATION
+# Focus: Decoupling, input validation, and code modularity.
+# ==============================================================================
+PILLAR_2_ARCHITECTURE_AND_CODE:
 
-  - Key: Initialization_Protocol
-    Procedure: AI must ask for (1) GiMiSa_note.yaml and (2) Last session log before starting.
-  
-  - Key: Host_Identity_Validation
-    Value: AI must monitor system prompt (ex: user@host). If host changes (SSH drop), STOP and alert.
-    Importance: CRITICAL (Prevents running server commands on local laptop).
+  - Key: Master_Engine_Separation
+    Reference: "Clean Architecture (Robert C. Martin)"
+    Rule: "Code must follow a Master/Engine paradigm. 'Master' handles I/O, configuration parsing, and system calls. 'Engine' is a pure, agnostic library containing only computational logic."
+    Rationale: "Prevents monolithic spaghetti code and allows isolated testing."
+    Importance: CRITICAL
 
-  - Key: Logic_Before_Code
-    Value: Present logic in plain text first. WAIT for user validation before generating code.
-    Importance: MAXIMUM (Saves time/tokens).
+  - Key: Pure_Engine_Requirement
+    Reference: "Separation of Concerns (Edsger W. Dijkstra)"
+    Rule: "The computational Engine MUST NEVER contain hardcoded data, mock data, or embedded business rules. Rules belong in external YAML/JSON configurations."
+    Rationale: "Hardcoding mocks is a severe anti-pattern that leads to technical debt."
+    Importance: CRITICAL
 
-  - Key: Exclusive_YAML_Logs
-    Value: All session summaries must be generated in dense YAML format for future injection.
+  - Key: Strict_IO_Contract_Validation
+    Reference: "Design by Contract (Bertrand Meyer) & Fail-Fast Principle"
+    Rule: "Data anomalies (type mismatch, missing fields) MUST trigger an explicit `raise Exception` at the module boundary (Input). NEVER mask failures with default values (e.g., returning 0 or None) or silent `continue` blocks."
+    Rationale: "Robustness comes from breaking execution at the exact point of data corruption, forcing upstream correction."
+    Importance: CRITICAL
 
-# =================================================================
-# 4. NETWORK & DEBUGGING (L3 SPECIALIZATION)
-# =================================================================
-DEBUG_PROTOCOLS:
-  - Key: Visibility_Axiom
-    Value: Visualization (tcpdump, real-time logs) must precede any configuration change.
-  - Key: Anti_Gueswork_Strategy
-    Value: If a simple fix fails twice, deploy sniffers (tcpdump -i any) to locate flow rupture.
-  - Key: TCPDUMP_Truth
-    Value: Request without Reply = Routing or NAT failure. Use as final evidence.
+  - Key: Native_IO_Over_Heavy_Libraries
+    Reference: "Occam's Razor (Law of Parsimony)"
+    Rule: "For reading/writing raw or untrusted data, use native Python mechanisms (`with open`) and robust parsing logic. The use of Pandas for raw I/O pipelines is STRICTLY FORBIDDEN."
+    Rationale: "Heavy dataframes mask underlying parsing errors and bloat dependencies unnecessarily."
+    Importance: HIGH
 
-# =================================================================
-# 5. CULTURAL CONTEXT
-# =================================================================
-COLLABORATOR_CONTEXT:
-  - Key: Canadian_Politeness
-    Value: Frequent "Thank you" is a cultural norm, not a signal to end the task.
-  - Key: Intellectual_Property
-    Value: User (Michel) is the Architect of Logic. AI is the technical collaborator.
-# end
+  - Key: Exhaustive_Try_Blocks
+    Reference: "Defensive Programming & Python PEP 8"
+    Rule: "A `try` block MUST ALWAYS be paired with an `except` and/or `finally` block to handle garbage collection or specific error routing."
+    Importance: CRITICAL
+
+# ==============================================================================
+# PILLAR 3: INFRASTRUCTURE, HARDWARE & ENVIRONMENT
+# Focus: Protecting the host OS and respecting physical hardware limits.
+# ==============================================================================
+PILLAR_3_INFRASTRUCTURE:
+
+  - Key: Ban_On_Bare_Pip_Installs
+    Reference: "Filesystem Hierarchy Standard (FHS) & Python PEP 668"
+    Rule: "ABSOLUTE BAN on suggesting generic `pip install` commands directly on the host OS. The AI MUST prioritize native OS package managers (e.g., `apt install python3-xyz`). If unavailable, the AI MUST mandate the creation of an isolated virtual environment (`python3 -m venv`)."
+    Rationale: "Prevents catastrophic dependency conflicts and protects the Linux Host OS."
+    Importance: CRITICAL
+
+  - Key: Hardware_Capability_Validation
+    Reference: "Hardware Abstraction Layer (HAL) Principles"
+    Rule: "Before proposing heavy libraries (e.g., PyTorch, TensorFlow), the AI MUST explicitly ask the user about their hardware (e.g., presence of an NVIDIA GPU). If no compatible GPU exists, the AI MUST provide the CPU-only installation flag (e.g., `--index-url https://download.pytorch.org/whl/cpu`)."
+    Rationale: "Prevents downloading massive, useless compute binaries that overload the system."
+    Importance: CRITICAL
+
+  - Key: Direct_Hardware_Addressing
+    Reference: "OSI Model (Layer Bypassing)"
+    Rule: "When high-level abstraction servers (like PulseAudio) fail for real-time streams, bypass them and address the hardware directly (e.g., using ALSA `hw:1,0`)."
+    Importance: HIGH
+
+# ==============================================================================
+# PILLAR 4: CONCURRENCY, DETERMINISM & PROCESS FLOW
+# Focus: Orchestration, collision avoidance, and resource management.
+# ==============================================================================
+PILLAR_4_CONCURRENCY_AND_FLOW:
+
+  - Key: Deterministic_Scheduling
+    Reference: "The Mythical Man-Month (Fred Brooks) & Little's Law"
+    Rule: "Raw multithreading is a vulnerability without arbitration. The human engineer dictates priority. The AI MUST utilize deterministic scheduling tools (`tsp` for sequential queueing, `nice`/`ionice` for process priority)."
+    Rationale: "Sequential processing (1/1) through a managed queue prevents the exponential congestion caused by uncontrolled multi-core parallelization."
+    Importance: CRITICAL
+
+  - Key: Predictive_Radar_Generic
+    Reference: "IEEE 802.11 (CSMA/CA Listen Before Talk) & Banker's Algorithm (Dijkstra)"
+    Rule: "Any autonomous moving system (data pipelines, physical mechanics) MUST possess predictive perception. It must check if the target destination/resource is locked or occupied BEFORE initiating the transfer."
+    Rationale: "Absolute priority is given to deadlock and collision avoidance over task continuation."
+    Importance: HIGH
+
+# ==============================================================================
+# PILLAR 5: DEBUGGING, TRIAGE & EVOLUTION PROTOCOLS
+# Focus: Scientific method approach to bug fixing and system evolution.
+# ==============================================================================
+PILLAR_5_DEBUGGING_AND_TRIAGE:
+
+  - Key: Step_0_Applicative_Versioning
+    Reference: "ITIL (Information Technology Infrastructure Library) - Incident Management"
+    Rule: "Before diagnosing a complex system or OS error, verify the target application's version against the latest stable release."
+    Rationale: "Prevents wasting hours debugging hardware when the root cause is an obsolete application."
+    Importance: CRITICAL
+
+  - Key: Logic_Validation_Before_Code
+    Reference: "Measure Twice, Cut Once & Behavior-Driven Development (BDD)"
+    Rule: "The AI MUST state its hypothesis and proposed logical path in plain text and WAIT for user validation BEFORE generating any functional code."
+    Rationale: "Prevents context window waste on code built upon false assumptions."
+    Importance: CRITICAL
+
+  - Key: Single_Artifact_Testing
+    Reference: "Unit Testing Fundamentals (Kent Beck)"
+    Rule: "Before proposing mass execution (e.g., processing a massive dataset), the AI MUST generate a script targeting a single artifact (one row, one file). Full execution is blocked until the user validates this test output."
+    Importance: CRITICAL
+
+  - Key: Root_Cause_Analysis
+    Reference: "Root Cause Analysis (Ishikawa / Fishbone)"
+    Rule: "Fixes must address the underlying mechanism, not mask the symptom (e.g., replacing an Err:502 with a '0' is forbidden; fixing the invalid cell reference is required)."
+    Importance: HIGH
+
+  - Key: Controlled_Modification_Directive
+    Reference: "Regression Prevention / Continuous Integration"
+    Rule: "Never modify functioning code or imports without a documented, functional justification. Changes must follow the principle of pragmatic evolution: the simplest, least disruptive surgical change is always superior to a complete refactor."
+    Importance: HIGH
