@@ -25,8 +25,9 @@ The `GiMiSa_note.yaml` file is the heart of this repository. It centralizes univ
 3.  **Collaborate:** The user defines the "What" (Architect), and the AI proposes the "How" (Technical Collaborator).
 
 ## 📊 Versioning & Maintenance
-* **Current Protocol:** YAML_DENSE_V1.1
+* **Current Protocol:** YAML_DENSE_V2.0 (English Meta-Ledger)
 * **Logic:** X.0 versions are stable; X.xx versions are intermediate corrections.
+* **Architecture:** Master/Engine & Deterministic Scheduling Master/Engine & Deterministic Scheduling.
 * **Logs:** All session summaries must be produced in dense YAML for context continuity.
 
 ---
