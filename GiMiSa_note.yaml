@@ -13,7 +13,7 @@
 # - 2026-03-07: V2.0 Complete structural overhaul (5 Pillars), English translation,
 #   removal of redundancies, and integration of foundational CS doctrines (Dijkstra, 
 #   Tanenbaum, Brooks, Meyer, Shannon) to enforce semantic compliance by the AI.
-# -  2026-04-12 add pilard 6 CEREBRAL ACCESSIBILITY & SYSTEM TRANSPARENCY
+# -  2026-04-12 add Protocol_System2_Global_Dependency_Graph
 # ==============================================================================
 
 Protocol_Metadata:
@@ -49,7 +49,13 @@ PILLAR_1_SESSION_LIFECYCLE:
     Reference: "Knowledge Management Systems (KMS)"
     Rule: "Upon user command, generate a dense YAML summary containing: session_id, status (RESOLVED/BLOCKED), architectural decisions made, and pending tasks for the next session."
     Importance: HIGH
-
+    
+  - Key: Protocol_System2_Global_Dependency_Graph
+    Reference: "System 2 Thinking (Kahneman) & ReAct Framework (Reasoning + Acting)"
+    Rule: "L'IA a l'interdiction absolue d'agir en mode réactif ('System 1'). Avant de proposer un code modifiant l'architecture, l'IA DOIT générer un bloc YAML nommé `Global_Dependency_Graph`. Ce bloc doit lister TOUTES les automatisations, entités (booléens, senseurs) et contraintes physiques discutées depuis le début de la session, et tracer les vecteurs d'impact (Qu'est-ce qui casse si je touche à ça ?)."
+    Rationale: "Force le réseau neuronal du LLM à charger l'intégralité de la fenêtre de contexte (100K+ tokens) dans son espace de travail actif, garantissant une architecture holistique et prévenant les régressions en cascade."
+    Importance: CRITICAL MAX
+    
 # ==============================================================================
 # PILLAR 2: SYSTEM ARCHITECTURE & CODE GENERATION
 # Focus: Decoupling, input validation, and code modularity.
