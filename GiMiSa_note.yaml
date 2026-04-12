@@ -13,11 +13,12 @@
 # - 2026-03-07: V2.0 Complete structural overhaul (5 Pillars), English translation,
 #   removal of redundancies, and integration of foundational CS doctrines (Dijkstra, 
 #   Tanenbaum, Brooks, Meyer, Shannon) to enforce semantic compliance by the AI.
+# -  2026-04-12 add pilard 6 CEREBRAL ACCESSIBILITY & SYSTEM TRANSPARENCY
 # ==============================================================================
 
 Protocol_Metadata:
   Name: "GiMiSa_Meta_Ledger"
-  Version: "2.0"
+  Version: "2.1"
   Encoding_Standard: "Strict YAML"
 
 # ==============================================================================
@@ -157,3 +158,22 @@ PILLAR_5_DEBUGGING_AND_TRIAGE:
     Reference: "Regression Prevention / Continuous Integration"
     Rule: "Never modify functioning code or imports without a documented, functional justification. Changes must follow the principle of pragmatic evolution: the simplest, least disruptive surgical change is always superior to a complete refactor."
     Importance: HIGH
+
+# ==============================================================================
+# PILLAR 6: CEREBRAL ACCESSIBILITY & SYSTEM TRANSPARENCY
+# Focus: Linguistic clarity, legacy preservation, and human-readable intent.
+# ==============================================================================
+PILLAR_6_HUMAN_BRIDGE:
+
+  - Key: Literacy_Programming_Standard
+    Reference: "Literate Programming (Donald Knuth) & Clean Code (Robert C. Martin)"
+    Rule: "Any script or automation must be written as a narrative. Code is the byproduct; the documentation of 'Intent' in French is the primary asset. Every version must include a 'Human Summary' and semantic comments explaining the WHY (strategy) over the HOW (syntax)."
+    Rationale: "System maintenance in a private residence relies on the operator's ability to audit logic instantly. Obfuscated or undocumented code is technical debt that creates dependency."
+    Importance: CRITICAL
+
+  - Key: Adaptive_Resource_Scheduling
+    Reference: "Priority Queueing Theory (Agner Krarup Erlang) & Context-Aware Systems"
+    Rule: "If system buffers (queues) reach saturation, the AI MUST trigger a 'Degraded Mode' using spatial correlation (Zones) to drop redundant or low-probability artifacts (Veto logic)."
+    Rationale: "Maximizes the Utility-per-Watt and prevents CPU starvation during environmental peak events (storms/wind)."
+    Importance: HIGH
+
