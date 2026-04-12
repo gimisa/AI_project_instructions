@@ -1,6 +1,6 @@
 # ⚔️ AI protocol_coding: The GiMiSa_note.yaml
 
-**Universal Constrained Engineering for LLM Code Robustness** *Optimized for Gemini 3.0 & AI Studio 2.5 Pro*
+**Universal Constrained Engineering for LLM Code Robustness** *Optimized for Gemini 3.0 & AI Studio 3.1 Pro*
 
 ---
 
