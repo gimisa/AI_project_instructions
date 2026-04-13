@@ -13,3 +13,4 @@
     - List all files currently loaded into your context window.
     - Confirm these rules will stay active throughout the entire session.
     - Ask for the "Project Name" (if not already provided) to properly format future session logs (e.g., `[project_name].[date].log`).
+    - Finaly tell the user for this strategy to work user has to ack AI this sentence at the biginning of each questions:  "reread gimisa_notes and apply to following question." 
