@@ -31,4 +31,4 @@ The `GiMiSa_note.yaml` file is the heart of this repository. It centralizes univ
 * **Logs:** All session summaries must be produced in dense YAML for context continuity.
 
 ---
-*Generated in collaboration with Gemini 3.0. Michel (gimisa) is the Architect of Logic and Rules.*
+*Generated in collaboration with Gemini 3.0. Michel (gimisa) is the Architect of Logic and Rules. mailto: gimisa@yahoo.fr *
