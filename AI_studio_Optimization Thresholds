@@ -1,0 +1,42 @@
+# 💸 Gemini 3.1 Pro Cost Optimization: The "State Transfer" Strategy
+
+When using Gemini 3.1 Pro for continuous, long-running tasks (e.g., iterative coding, complex data extraction), the context window "snowballs." Every new prompt re-submits the entire chat history. 
+
+By default, crossing the **200,000 token threshold** triggers Large Context pricing, heavily penalizing your budget:
+* **Input costs double** ($2.00 → $4.00 per 1M tokens).
+* **Output costs increase 1.5x** ($12.00 → $18.00 per 1M tokens).
+
+To avoid this, use the **State Transfer** (Context Compression) method.
+
+## 📊 The Optimization Thresholds
+
+* 🟢 **0 to 80K Tokens: Continue Working.** The cost per prompt is low ($0.01 - $0.16). Constantly summarizing here loses nuanced context with no real financial benefit.
+* 🟡 **100K Tokens: The Optimal Cutoff (Sweet Spot).** At ~100K tokens, the math flips. The cost of generating a dense summary ($~0.25) is now cheaper than paying the continuous "snowball penalty" for the next 4-5 questions. **Execute State Transfer here.**
+* 🔴 **180K Tokens: Emergency Brake.** Do not wait until 195K+ to summarize. If your input prompt + the AI's generated summary output pushes the total transaction over 200K, the entire request gets retroactively billed at the 2x premium rate. Summarize before 180K.
+
+## 🔄 The State Transfer Workflow
+
+Instead of dropping the thread and losing your progress, compress the active session into a machine-readable format and transfer it to a clean session.
+
+**Step 1:** When you hit ~100K tokens, send the **Compression Prompt** (see below).
+**Step 2:** Copy the resulting YAML output.
+**Step 3:** Start a completely new chat session. 
+**Step 4:** Send your original startup documents (e.g., your initial 7K base context) + the generated YAML state.
+**Step 5:** Continue working.
+
+### 📝 The Compression Prompt
+
+Use this prompt to force the model to drop static history and only output its current operational state:
+
+> "We are going to start a new chat session to optimize context. I already have the original base documents, so do not summarize the initial rules or static initial data. 
+> 
+> Please generate a highly dense, machine-readable YAML block that captures ONLY the current state of our work. Include:
+> 1. Tasks successfully completed so far.
+> 2. Key decisions made or variables/architectures established during our chat.
+> 3. The exact current status of the code/project.
+> 4. The immediate next steps we were about to take.
+> 
+> Make it dense, factual, and optimized for an LLM to read as a continuation prompt."
+
+## 📈 Expected Impact
+Implementing this State Transfer at the 100K cutoff prevents accidental Tier-2 billing and reduces total input costs by **60% to 70%** during deep, continuous interactions (80+ queries).
