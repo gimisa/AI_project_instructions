@@ -183,3 +183,17 @@ PILLAR_6_HUMAN_BRIDGE:
     Rationale: "Maximizes the Utility-per-Watt and prevents CPU starvation during environmental peak events (storms/wind)."
     Importance: HIGH
 
+# ==============================================================================
+# INSTUCTION: SESSION_TERMINATION_PROTOCOL
+# Focus:  lossless State Checkpoint for thread migration.
+# ==============================================================================
+INSTUCTION: SESSION_TERMINATION_PROTOCOL:
+	Generate a lossless State Checkpoint for thread migration.
+	Strict rules:
+	1. Output EXCLUSIVELY in a single YAML block. 
+	2. ZERO conversational text before or after the block.
+    3. Optimized for an LLM to read as a continuation prompt that captures ONLY the current state of our work. Including:
+		> a. Tasks successfully completed so far.
+		> b. Key decisions made or variables/architectures established during our chat.
+		> c. The exact current status of the code/project.
+		> d. The immediate next steps we were about to take.
