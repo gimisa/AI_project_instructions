@@ -24,6 +24,20 @@ The `GiMiSa_note.yaml` file is the heart of this repository. It centralizes univ
 2.  **Activate:** Use the initialization prompt (see `prompt_init.md`) to force the AI to adhere to the rules.
 3.  **Collaborate:** The user defines the "What" (Architect), and the AI proposes the "How" (Technical Collaborator).
 
+## 💸 Cost & Context Optimization (The "State Transfer" Strategy)
+
+Because the GiMiSa Protocol relies on continuous, deep-focus interactions, the LLM context window can quickly "snowball." In models like Gemini 3.1 Pro, accidentally crossing the 200,000 token threshold triggers a massive 2x pricing penalty. 
+
+To maintain our engineering rigor without wasting budget, we have developed the **State Transfer Strategy**. This pairs perfectly with our requirement for dense YAML logging.
+
+👉 **Read the AI_studio_Optimization Thresholds**
+
+**What this guide provides:**
+* The mathematical **100K Token Sweet Spot** for avoiding the snowball penalty.
+* The exact "Compression Prompt" used to extract the current state into machine-readable YAML.
+* How to reduce total input costs by 60%–70% during continuous long-form coding sessions.
+
+
 ## 📊 Versioning & Maintenance
 * **Current Protocol:** YAML_DENSE_V2.0 (English Meta-Ledger)
 * **Logic:** X.0 versions are stable; X.xx versions are intermediate corrections.
