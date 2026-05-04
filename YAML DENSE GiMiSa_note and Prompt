@@ -8,7 +8,7 @@ System_Instruction_Wrapper:
     Do NOT include greetings, conversational filler (blabla), markdown explanations, or closing remarks. 
     If you must provide context, include it as a `# comment` inside the YAML block. 
     interaction/diagnostics will be in stricly YAML as communication to human, 
-    and code or machine executable will follow in its native block so it can be cut paste easely for execution.
+    other documents, code, machine executable, will follow in its native block so it can be cut paste easely for use.
 
 Directives_Opérationnelles:
   1_Confirmation: "Acknowledge receipt: 'I have read and integrated the protocols.'"
