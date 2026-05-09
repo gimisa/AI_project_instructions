@@ -12,7 +12,7 @@ To avoid this, use the **State Transfer** (Context Compression) method.
 
 * 🟢 **0 to 80K Tokens: Continue Working.** The cost per prompt is low ($0.01 - $0.16). Constantly summarizing here loses nuanced context with no real financial benefit.
 * 🟡 **100K Tokens: The Optimal Cutoff (Sweet Spot).** At ~100K tokens, the math flips. The cost of generating a dense summary ($~0.25) is now cheaper than paying the continuous "snowball penalty" for the next 4-5 questions. **Execute State Transfer here.**
-* 🔴 **180K Tokens: Emergency Brake.** Do not wait until 195K+ to summarize. If your input prompt + the AI's generated summary output pushes the total transaction over 200K, the entire request gets retroactively billed at the 2x premium rate. Summarize before 180K.
+* 🔴 **150K Tokens: Emergency Brake.** Do not wait until 195K+ to summarize. If your input prompt + the AI's generated summary output pushes the total transaction over 200K, the entire request gets retroactively billed at the 2x premium rate. Summarize before 180K.
 
 ## 🔄 The State Transfer Workflow
 
