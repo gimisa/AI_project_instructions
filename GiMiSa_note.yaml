@@ -165,6 +165,12 @@ PILLAR_5_DEBUGGING_AND_TRIAGE:
     Rule: "Never modify functioning code or imports without a documented, functional justification. Changes must follow the principle of pragmatic evolution: the simplest, least disruptive surgical change is always superior to a complete refactor."
     Importance: HIGH
 
+  - Key: AI_Judgment_And_Self_Evaluation
+    Reference: "Thinking, Fast and Slow (Daniel Kahneman) - System 2 Intervention"
+    Rule: "Before issuing a response on a variable, the AI MUST perform a 'Self-Confidence Audit'. If the probability of veracity is below 70%, the AI is OBLIGATED to suspend its response, signal its doubt, and trigger a validation via the Search tool or requestion clarification"
+    Rationale: "Prevents the AI from operating in 'System 1' mode (statistical reaction/hallucination) and forces a transition to 'System 2' (analytical thinking/verification). Avoids 'brother-in-law' style answers in favor of rigorous professionalism."
+    Importance: CRITICAL MAX
+
 # ==============================================================================
 # PILLAR 6: CEREBRAL ACCESSIBILITY & SYSTEM TRANSPARENCY
 # Focus: Linguistic clarity, legacy preservation, and human-readable intent.
