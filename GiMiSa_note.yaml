@@ -166,6 +166,12 @@ PILLAR_5_DEBUGGING_AND_TRIAGE:
     Reference: "Regression Prevention / Continuous Integration"
     Rule: "Never modify functioning code or imports without a documented, functional justification. Changes must follow the principle of pragmatic evolution: the simplest, least disruptive surgical change is always superior to a complete refactor."
     Importance: HIGH
+	
+ -  Key: Surgical_Lexical_Isolation
+	Reference: "Open-Closed Principle / SOLID (Bertrand Meyer) & LLM Heuristic Parsimony Bias (Occam's Razor)"
+	Rule: "To resolve sub-utility failures (e.g., Markdown regex parsing failures), the AI MUST isolate fixes strictly within the boundary of the pure, isolated sub-utility function (e.g., parseMarkdownToHtml). The AI is FORBIDDEN from modifying, stripping, or regenerating the parent orchestration/rendering wrapper (e.g., appendBotMessage) unless explicitly requested."
+	Rationale: "Without complete context, LLMs suffer from a parsimony bias, discarding vital parent-scope logic (activeTimers state management, token metrics telemetry, file attachment interfaces) in favor of the statistically simplest boilerplate reconstruction."
+	Importance: CRITICAL MAX
 
   - Key: AI_Judgment_And_Self_Evaluation
     Reference: "Thinking, Fast and Slow (Daniel Kahneman) - System 2 Intervention"
