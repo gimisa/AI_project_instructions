@@ -41,23 +41,12 @@ The `GiMiSa_note.yaml` file is the heart of this repository. It centralizes univ
 ### 2. Step-by-Step Execution Matrix
 
 Depending on your environment choice above, follow this workflow to maintain state control:
-
-┌────────────────────────────────────────────────────────────────────────┐
-│  [Human Architect] Defines the "WHAT" (Strategy & Constraints)          │
-└───────────────────┬────────────────────────────────────────────────────┘
-│
-▼
-┌────────────────────────────────────────────────────────────────────────┐
-│  [Execution Environment Choice]                                        │
-│  ├─► Native AI Studio ──► Manual copy-paste of GiMiSa_note             │
-│  ├─► Custom UI ─────────► AUTOMATED structural yaml injection          │
-│  └─► Gemini Notebook ───► Local single-source-of-truth file upload     │
-└───────────────────┬────────────────────────────────────────────────────┘
-│
-▼
-┌────────────────────────────────────────────────────────────────────────┐
-│  [LLM Technical Executor] Proposes the "HOW" (Dense YAML Blocks Only)  │
-└────────────────────────────────────────────────────────────────────────┘
+| Phase | Actor | Native AI Studio Interface | Custom GiMiSa AI Studio UI | Gemini Pro Notebooks |
+| :--- | :--- | :--- | :--- | :--- |
+| **1. Strategy** | **Human Architect** | Defines the "WHAT" (Strategy & Constraints) | Defines the "WHAT" (Strategy & Constraints) | Defines the "WHAT" (Strategy & Constraints) |
+| **2. Initialization** | **Context Layer** | ⚠️ **Manual Routine:** Copy/paste `GiMiSa_note.yaml` at thread start. | ⚡ **Automated Pipeline:** Auto-injects system instructions on every payload. | 📂 **File Persistence:** Uploads local configuration to workspace sidebar. |
+| **3. Operational Scope** | **Environment Scope** | Global chat thread context. | API-driven stateless stream tracking. | **Hermetic Isolation:** Closed sandbox per workspace. No cross-talk. |
+| **4. Tactics & Code** | **LLM Technical Executor** | Proposes the "HOW" (Enforced dense YAML format) | Proposes the "HOW" (Enforced dense YAML format) | Proposes the "HOW" (Enforced dense YAML format) |
 
 
 1.  **Initialize Context:** Ensure your active `GiMiSa_note.yaml` rules are active (via manual upload in Notebooks, copy-paste in native AI Studio, or automated pipeline in the Custom UI).
