@@ -24,6 +24,45 @@ The `GiMiSa_note.yaml` file is the heart of this repository. It centralizes univ
 1.  **Initialize:** Copy the content of `GiMiSa_note.yaml` into your AI session.
 2.  **Activate:** Use the initialization prompt and the **System Instruction Wrapper** to force the AI to adhere to the rules and output format.
 3.  **Collaborate:** The user defines the "What" (Architect), and the AI proposes the "How" (Technical Collaborator).
+4.  **Three Paths of Integration:
+  * **Option A: Native AI Studio Interface**
+    * *Operation:* Manual execution. The operator must manually copy and paste the entire content of `GiMiSa_note.yaml` at the absolute beginning of every new prompt thread.
+    * *Constraint:* Requires high manual discipline to avoid prompt drift and accidental state loss during long coding cycles.
+  * **Option B: Custom GiMiSa AI Studio UI (Recommended Ecosystem)**
+    * *Operation:* Automated local injection. This is a custom-engineered web application interface designed to interface directly with the Google AI Studio APIs. 
+    * *Advantage:* It automatically hooks, parses, and injects the `GiMiSa_note.yaml` system instructions into the payload stream of every single request. It guarantees absolute     stateless validation without requiring repetitive manual setups.
+  * **Option C: Gemini Pro (Notebook Architecture)**
+    * *Operation:* File-centric persistence. Unlike standard chat windows, Gemini Pro's Notebook interface acts as a hermetic workspace sandbox.
+    * *Advantage:* You upload basic, persistent context files (like your master architecture logs or base project blueprints) directly into the Notebook's structural sidebar.
+    * *Constraint:* **Hermetic Isolation.** Each Notebook is a completely closed silo. If you are running multiple concurrent environments (e.g., a core automation project vs. a specialized WSL2 desktop testing notebook), files do not cross-talk. To maintain synchronization, you must update your single-source-of-truth configuration locally and upload it manually to each individual Notebook workspace.
+
+---
+
+### 2. Step-by-Step Execution Matrix
+
+Depending on your environment choice above, follow this workflow to maintain state control:
+
+┌────────────────────────────────────────────────────────────────────────┐
+│  [Human Architect] Defines the "WHAT" (Strategy & Constraints)          │
+└───────────────────┬────────────────────────────────────────────────────┘
+│
+▼
+┌────────────────────────────────────────────────────────────────────────┐
+│  [Execution Environment Choice]                                        │
+│  ├─► Native AI Studio ──► Manual copy-paste of GiMiSa_note             │
+│  ├─► Custom UI ─────────► AUTOMATED structural yaml injection          │
+│  └─► Gemini Notebook ───► Local single-source-of-truth file upload     │
+└───────────────────┬────────────────────────────────────────────────────┘
+│
+▼
+┌────────────────────────────────────────────────────────────────────────┐
+│  [LLM Technical Executor] Proposes the "HOW" (Dense YAML Blocks Only)  │
+└────────────────────────────────────────────────────────────────────────┘
+
+
+1.  **Initialize Context:** Ensure your active `GiMiSa_note.yaml` rules are active (via manual upload in Notebooks, copy-paste in native AI Studio, or automated pipeline in the Custom UI).
+2.  **Enforce Logic Before Code:** Do not accept raw scripts immediately. Review the AI's logical hypothesis embedded in the dense YAML comments first.
+3.  **Audit the Token Thresholds:** Keep a close eye on the active context volume (Agile Range vs. Deep Work Marathon) to trigger a thread migration before hitting the critical overhead zone. See tampermonkey branch for Gemini_pro inteface token counter. 
 
 ## 💸 Cost & Context Optimization (The "State Transfer" Strategy)
 
@@ -31,7 +70,7 @@ Because the GiMiSa Protocol relies on continuous, deep-focus interactions, the L
 
 To maintain our engineering rigor without wasting budget, we have developed the **State Transfer Strategy**, relying heavily on the **Context Caching** behavior of modern LLMs.
 
-👉 **AI_Studio Optimization Thresholds & Rules:**
+👉 ** Optimization Thresholds & Rules:**
 
 * **The 1-Hour Cache Death Penalty:** Context caching typically expires after 1 hour of inactivity. If you take a break, migrate your thread first, or face full-price input costs to re-ingest the entire history upon your return.
 * **The 50K - 80K Zone (Agile):** The optimal sweet spot for intermittent, off-and-on coding sessions throughout the day.
