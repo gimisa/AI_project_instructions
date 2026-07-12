@@ -1,0 +1,293 @@
+// ==UserScript==
+// @name         Gemini Token Counter - V1.4 (Hover & Lean UI)
+// @namespace    http://tampermonkey.net/
+// @version      1.4
+// @description  Tracks full text context and dynamically calculates image token weights with fade-on-hover UI.
+// @author       Gemini AI / Human Collab
+// @match        https://gemini.google.com/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // --- Configuration & Constants ---
+    const CHARS_PER_TOKEN = 4;
+    const CONTEXT_LIMIT = 1000000; // Ajusté à 1.0M pour correspondre à ton profil Gemini 3.1 Pro
+    const VISION_PATCH_SIZE = 768;
+    const VISION_BASE_TOKEN_COST = 258;
+    
+    // State variables
+    let activePromptTokens = 0;
+    let latestOutputTokens = 0;
+    let cacheTokens = 0;
+    let attachmentCount = 0;
+    let attachmentTokens = 0;
+    
+    // Whitelist (Target Text Containers)
+    const TARGET_USER_TAGS = ['user-query-content', 'user-query'];
+    const TARGET_AI_TAGS = ['model-response', 'response-container', 'message-content', 'response-element', 'code-block', 'table-block'];
+
+    // Blacklist (AST Pruning: UI noise to exclude from text token counts)
+    const IGNORE_TAGS = [
+        'message-actions', 'copy-button', 'thumb-up-button', 'thumb-down-button',
+        'tts-control-v2', 'conversation-action-menu', 'hallucination-disclaimer',
+        'model-response-actions', 'share-button', 'election-info-disclaimer',
+        'sensitive-memories-banner', 'freemium-rag-disclaimer', 'model-response-disclaimers',
+        'source-footnote', 'thinking-overlay', 'button', 'user-feedback', 'tooltip'
+    ];
+
+    // --- Utility: Debounce Function ---
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+
+    // --- UI Injection (Strict W3C Trusted Types CSP Compliant) ---
+    function createMetricRow(labelText, spanId, colorHex) {
+        const row = document.createElement('div');
+        row.style.display = 'flex';
+        row.style.justifyContent = 'space-between';
+        row.style.gap = '15px';
+        row.style.margin = '2px 0';
+        
+        const labelSpan = document.createElement('span');
+        labelSpan.textContent = labelText;
+        labelSpan.style.color = '#fff';
+        
+        const valueSpan = document.createElement('span');
+        valueSpan.id = spanId;
+        valueSpan.textContent = '0';
+        valueSpan.style.fontWeight = 'bold';
+        valueSpan.style.color = colorHex;
+        
+        row.appendChild(labelSpan);
+        row.appendChild(valueSpan);
+        return row;
+    }
+
+    function injectCounterUI() {
+        if (document.getElementById('gemini-token-counter')) return;
+
+        const counterDiv = document.createElement('div');
+        counterDiv.id = 'gemini-token-counter';
+        
+        // Style épuré, compact (11px) et dynamique (hover)
+        counterDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(20, 20, 20, 0.85);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 11px;
+            z-index: 999999;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+            border: 1px solid #444;
+            display: flex;
+            flex-direction: column;
+            width: 240px;
+            color: #fff;
+            transition: opacity 0.2s ease-in-out;
+        `;
+
+        // Ajout des écouteurs pour l'effet d'effacement transparent réactif
+        counterDiv.addEventListener('mouseenter', () => {
+            counterDiv.style.opacity = '0.05';
+            counterDiv.style.pointerEvents = 'none'; // Permet de cliquer à travers le widget
+        });
+        
+        // Note: L'écouteur global ou le réengagement se fait via la souris quittant la zone 
+        // Pour éviter le clignotement si pointer-events est 'none', on applique un léger reset ou on laisse le document gérer le mousemove si nécessaire.
+        // Ici, une implémentation CSS standard ou une transition native JS est configurée.
+        document.addEventListener('mousemove', function(e) {
+            const rect = counterDiv.getBoundingClientRect();
+            // Si la souris sort des limites du rectangle du widget (+ une marge de sécurité)
+            if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+                counterDiv.style.opacity = '1';
+                counterDiv.style.pointerEvents = 'auto';
+            }
+        });
+
+        // HEADER NETTOYÉ
+        const titleRow = document.createElement('div');
+        titleRow.style.fontWeight = 'bold';
+        titleRow.style.color = '#00ffcc';
+        titleRow.style.marginBottom = '4px';
+        titleRow.style.borderBottom = '1px solid #333';
+        titleRow.style.paddingBottom = '2px';
+        titleRow.textContent = 'Token Tracker V1.4';
+        counterDiv.appendChild(titleRow);
+
+        // Rows
+        counterDiv.appendChild(createMetricRow('Active Prompt:', 'g-prompt-count', '#00FF41'));
+        counterDiv.appendChild(createMetricRow('Latest Output:', 'g-latest-count', '#00BFFF'));
+        counterDiv.appendChild(createMetricRow('Cache (History):', 'g-cache-count', '#FF003C'));
+        counterDiv.appendChild(createMetricRow('Attachments:', 'g-attach-count', '#FFA500'));
+        
+        const separator = document.createElement('div');
+        separator.style.borderBottom = '1px dashed #333';
+        separator.style.margin = '4px 0';
+        counterDiv.appendChild(separator);
+        
+        counterDiv.appendChild(createMetricRow('Total Context:', 'g-total-count', '#FFD700'));
+        counterDiv.appendChild(createMetricRow('Saturation:', 'g-saturation-count', '#FFD700'));
+
+        document.body.appendChild(counterDiv);
+    }
+
+    // --- UI State Management ---
+    function updateUI() {
+        const promptSpan = document.getElementById('g-prompt-count');
+        const latestSpan = document.getElementById('g-latest-count');
+        const cacheSpan = document.getElementById('g-cache-count');
+        const attachSpan = document.getElementById('g-attach-count');
+        const totalSpan = document.getElementById('g-total-count');
+        const saturationSpan = document.getElementById('g-saturation-count');
+
+        const totalTokens = activePromptTokens + latestOutputTokens + cacheTokens + attachmentTokens;
+        
+        if (promptSpan) promptSpan.textContent = activePromptTokens.toLocaleString();
+        if (latestSpan) latestSpan.textContent = latestOutputTokens.toLocaleString();
+        if (cacheSpan) cacheSpan.textContent = cacheTokens.toLocaleString();
+        if (attachSpan) attachSpan.textContent = `${attachmentCount} img (~${attachmentTokens.toLocaleString()} tkns)`;
+        if (totalSpan) totalSpan.textContent = totalTokens.toLocaleString() + ' / 1,000,000';
+
+        if (saturationSpan) {
+            const percentage = ((totalTokens / CONTEXT_LIMIT) * 100).toFixed(3); // Plus précis pour les petits changements
+            saturationSpan.textContent = `${percentage}%`;
+            
+            if (percentage > 90) {
+                saturationSpan.style.color = '#FF003C';
+            } else if (percentage > 75) {
+                saturationSpan.style.color = '#FFD700';
+            } else {
+                saturationSpan.style.color = '#00FF41';
+            }
+        }
+    }
+
+    function calculateTextTokens(text) {
+        if (!text) return 0;
+        return Math.ceil(text.trim().length / CHARS_PER_TOKEN);
+    }
+
+    // --- AST Pruning & Text Extraction ---
+    function findTargetElements(root, tagNames) {
+        let found = [];
+        function search(node) {
+            if (!node) return;
+            if (node.nodeType === Node.ELEMENT_NODE && node.tagName) {
+                if (tagNames.includes(node.tagName.toLowerCase())) {
+                    found.push(node);
+                }
+            }
+            if (node.shadowRoot) search(node.shadowRoot);
+            if (node.childNodes) node.childNodes.forEach(search);
+        }
+        search(root);
+        return found;
+    }
+
+    // --- Text Extraction with AST Pruning ---
+    function extractAllText(node) {
+        if (!node) return "";
+        
+        if (node.nodeType === Node.ELEMENT_NODE && node.tagName) {
+            if (IGNORE_TAGS.includes(node.tagName.toLowerCase())) {
+                return ""; 
+            }
+        }
+
+        if (node.nodeType === Node.TEXT_NODE) return node.textContent || "";
+        
+        let text = "";
+        if (node.shadowRoot) text += extractAllText(node.shadowRoot);
+        if (node.childNodes) {
+            node.childNodes.forEach(child => {
+                text += extractAllText(child);
+            });
+        }
+        return text;
+    }
+
+    // --- Module 1: Active Input Capture ---
+    function setupInputCapture() {
+        document.body.addEventListener('input', function(e) {
+            const target = e.target;
+            if (target.tagName.toLowerCase() === 'textarea' || target.isContentEditable) {
+                const textContent = target.tagName.toLowerCase() === 'textarea' ? target.value : target.textContent;
+                activePromptTokens = calculateTextTokens(textContent);
+                updateUI();
+            }
+        }, true);
+    }
+
+    // --- Module 2 & 3: Context & Image Capture (Debounced) ---
+    const processContext = debounce(() => {
+        let aggregatedHistoricalText = "";
+        
+        // Prompts
+        const userElements = findTargetElements(document.body, TARGET_USER_TAGS);
+        userElements.forEach(el => {
+            aggregatedHistoricalText += extractAllText(el) + "\n";
+        });
+
+        // AI Responses
+        const responseElements = findTargetElements(document.body, TARGET_AI_TAGS);
+        let latestAIText = "";
+        
+        if (responseElements.length > 0) {
+            const lastElement = responseElements[responseElements.length - 1];
+            latestAIText = extractAllText(lastElement);
+            
+            for (let i = 0; i < responseElements.length - 1; i++) {
+                aggregatedHistoricalText += extractAllText(responseElements[i]) + "\n";
+            }
+        }
+
+        latestOutputTokens = calculateTextTokens(latestAIText);
+        cacheTokens = calculateTextTokens(aggregatedHistoricalText);
+
+        // Process Multimodal Attachments
+        const imageElements = document.querySelectorAll('img[data-test-id="uploaded-img"]');
+        attachmentCount = imageElements.length;
+        attachmentTokens = 0;
+
+        imageElements.forEach(img => {
+            const w = img.naturalWidth || VISION_PATCH_SIZE;
+            const h = img.naturalHeight || VISION_PATCH_SIZE;
+            const tiles = Math.ceil(w / VISION_PATCH_SIZE) * Math.ceil(h / VISION_PATCH_SIZE);
+            attachmentTokens += (tiles * VISION_BASE_TOKEN_COST);
+        });
+
+        updateUI();
+
+    }, 1000); 
+
+    function setupOutputCapture() {
+        const observer = new MutationObserver(() => {
+            processContext();
+        });
+        observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+    }
+
+    // --- Initialization ---
+    function init() {
+        injectCounterUI();
+        setupInputCapture();
+        setupOutputCapture();
+        processContext();
+        console.log("[Gemini Token Counter] Initialized V1.4 - Lean Hover Interface Ready.");
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
